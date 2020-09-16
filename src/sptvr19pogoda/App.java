@@ -6,6 +6,7 @@
 package sptvr19pogoda;
 
 import java.util.Random;
+import java.util.Scanner;
 
 /**
  *
@@ -14,12 +15,14 @@ import java.util.Random;
 class App {
     public void run (){
         System.out.println("---project Weather---");
-        Random random = new Random ();
+        Random random = new Random();
         int n = 0, min=-50, max=50;
+        //Создаём массив зубчатый
         int [][] tInYear = new int [12][];
         for (int i = 0; i < 12; i++) {
+            
             switch (i) {
-                case 0: min=-25; max=-5; n = 31; break;
+                case 0:min=-25; max=-5; n = 31; break;
                 case 1:min=-25; max=5;  n = 28; break;
                 case 2:min=-15; max=10;  n = 31; break;
                 case 3:min=-5; max=15;  n = 30; break;
@@ -32,13 +35,22 @@ class App {
                 case 10:min=-5; max=5;  n = 30; break;
                 case 11:min=-15; max=0;  n = 31; break;
             }
+            
             tInYear [i] = new int[n];
             for (int j = 0; j < tInYear[i].length; j++) {
-                tInYear[i][j] = random.nextInt(max-min)+min;
+                tInYear[i][j] = random.nextInt(max-min+1)+min;
                 System.out.printf("%4d",tInYear[i][j]);
             }
             System.out.println("");
-           
         }
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("Введите месяц: ");
+        int month = scanner.nextInt();
+        System.out.println("Введите день: ");
+        int day = scanner.nextInt();
+        System.out.println("В этот день была температура: "+tInYear[month-1][day-1]);
+           
+        
     }  
 }
